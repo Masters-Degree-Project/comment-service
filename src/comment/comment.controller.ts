@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import CommentDto from './comment.dto';
+import { ServiceGuard } from 'src/service.guard';
 
+@UseGuards(ServiceGuard)
 @Controller({ path: 'comments' })
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
