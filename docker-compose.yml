@@ -6,7 +6,9 @@ services:
     ports:
       - "${SERVICE_PORT:-3000}:${SERVICE_PORT:-3000}"
     environment:
-      - MONGODB_URI=mongodb://mongodb:27017/comment-service
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
       - NODE_ENV=production
       - SERVICE_PORT=${SERVICE_PORT:-3000}
     depends_on:
@@ -17,7 +19,7 @@ services:
   mongodb:
     image: mongo:latest
     ports:
-      - "27017:27017"
+      - "${DB_PORT}:27017"
     volumes:
       - mongodb_data:/data/db
     networks:
