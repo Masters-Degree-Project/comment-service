@@ -31,7 +31,12 @@ export class ConsulService
       await this.consul.agent.service.register({
         id: this.serviceId,
         name: consulConfig.serviceName,
-        tags: consulConfig.tags,
+        tags: [
+          ...consulConfig.tags,
+          'traefik.enable=true',
+          `traefik.http.middlewares.${consulConfig.serviceName}-header.headers.customrequestheaders.X-Service=${consulConfig.serviceName}`,
+          `traefik.http.routers.${consulConfig.serviceName}.middlewares=${consulConfig.serviceName}-header`,
+        ],
         port: consulConfig.servicePort,
         check: {
           name: `${consulConfig.serviceName}-service-check`,
