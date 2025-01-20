@@ -31,6 +31,8 @@ export class ConsulService
       await this.consul.agent.service.register({
         id: this.serviceId,
         name: consulConfig.serviceName,
+        address: consulConfig.serviceIp,
+        port: consulConfig.servicePort,
         tags: [
           ...consulConfig.tags,
           'traefik.enable=true',
@@ -39,7 +41,6 @@ export class ConsulService
           `traefik.http.routers.${consulConfig.serviceName}-router.entryPoints=web`,
           `traefik.http.services.${consulConfig.serviceName}.loadBalancer.server.port=${consulConfig.servicePort}`,
         ],
-        port: consulConfig.servicePort,
         check: {
           name: `${consulConfig.serviceName}-service-check`,
           http: `http://${consulConfig.serviceIp}:${consulConfig.servicePort}/health`,
