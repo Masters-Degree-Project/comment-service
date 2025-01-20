@@ -9,8 +9,9 @@ async function bootstrap() {
 
   setupGracefulShutdown({ app: service });
 
-  console.log('Service is running on port : ', process.env.PORT);
-  await service.listen(process.env.PORT ?? 3000);
+  const port = process.env.SERVICE_PORT ?? 3000;
+  console.log('Service is running on port:', port);
+  await service.listen(port);
 }
 
 bootstrap();
