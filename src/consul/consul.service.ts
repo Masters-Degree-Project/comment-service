@@ -34,10 +34,10 @@ export class ConsulService
         tags: [
           ...consulConfig.tags,
           'traefik.enable=true',
-          `traefik.http.routers.${consulConfig.serviceName}-router.rule=Header(\`X-Service\`, \`${consulConfig.serviceName}\`)`,
+          `traefik.http.routers.${consulConfig.serviceName}-router.rule=Headers(\`X-Service\`, \`${consulConfig.serviceName}\`)`,
           `traefik.http.routers.${consulConfig.serviceName}-router.service=${consulConfig.serviceName}`,
           `traefik.http.routers.${consulConfig.serviceName}-router.entryPoints=web`,
-          `traefik.http.services.${consulConfig.serviceName}.loadBalancer.servers.url=http://${consulConfig.serviceIp}:${consulConfig.servicePort}`,
+          `traefik.http.services.${consulConfig.serviceName}.loadBalancer.server.port=${consulConfig.servicePort}`,
         ],
         port: consulConfig.servicePort,
         check: {
