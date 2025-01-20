@@ -38,6 +38,7 @@ export class ConsulService
           `traefik.http.routers.${consulConfig.serviceName}-router.service=${consulConfig.serviceName}`,
           `traefik.http.routers.${consulConfig.serviceName}-router.entryPoints=web`,
           `traefik.http.services.${consulConfig.serviceName}.loadBalancer.server.port=${consulConfig.servicePort}`,
+          `traefik.http.services.${consulConfig.serviceName}.loadBalancer.server.ip=${consulConfig.serviceIp}`,
         ],
         port: consulConfig.servicePort,
         check: {
