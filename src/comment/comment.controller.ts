@@ -4,7 +4,7 @@ import CommentDto from './comment.dto';
 import { ServiceGuard } from 'src/service.guard';
 
 @UseGuards(ServiceGuard)
-@Controller({ path: 'comments' })
+@Controller({ path: 'api/v1/comments' })
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
