@@ -11,10 +11,6 @@ async function bootstrap() {
 
   console.log('Service is running on port : ', process.env.PORT);
   await service.listen(process.env.PORT ?? 3000);
-
-  setTimeout(() => {
-    process.kill(process.pid, 'SIGTERM');
-  }, 5000);
 }
 
 bootstrap();
