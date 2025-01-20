@@ -23,5 +23,9 @@ services:
     networks:
       - traefik-network
 
+networks:
+  traefik-network:
+    name: traefik-network
+
 volumes:
   mongodb_data: 
