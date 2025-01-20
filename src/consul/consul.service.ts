@@ -34,8 +34,10 @@ export class ConsulService
         tags: [
           ...consulConfig.tags,
           'traefik.enable=true',
-          `traefik.http.middlewares.${consulConfig.serviceName}-header.headers.customrequestheaders.X-Service=${consulConfig.serviceName}`,
-          `traefik.http.routers.${consulConfig.serviceName}.middlewares=${consulConfig.serviceName}-header`,
+          `traefik.http.routers.${consulConfig.serviceName}-router.rule=Header(\`X-Service\`, \`${consulConfig.serviceName}\`)`,
+          `traefik.http.routers.${consulConfig.serviceName}-router.service=${consulConfig.serviceName}`,
+          `traefik.http.routers.${consulConfig.serviceName}-router.entryPoints=web`,
+          `traefik.http.services.${consulConfig.serviceName}.loadBalancer.servers.url=http://${consulConfig.serviceIp}:${consulConfig.servicePort}`,
         ],
         port: consulConfig.servicePort,
         check: {
