@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ConsulModule } from './consul/consul.module';
 import { GracefulShutdownModule } from 'nestjs-graceful-shutdown';
 import mongodbConfig from './config/mongodb.config';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import mongodbConfig from './config/mongodb.config';
       global: true,
     }),
     ConsulModule,
+    HealthModule,
   ],
 })
 export class ServiceModule {}
