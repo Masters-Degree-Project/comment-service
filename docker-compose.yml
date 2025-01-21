@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  app:
+  comment-service:
     build: .
     ports:
       - "${SERVICE_PORT:-3000}:${SERVICE_PORT:-3000}"
@@ -12,11 +12,11 @@ services:
       - NODE_ENV=production
       - SERVICE_PORT=${SERVICE_PORT:-3000}
     depends_on:
-      - mongodb
+      - comment-service-mongodb
     networks:
       - traefik-network
 
-  mongodb:
+  comment-service-mongodb:
     image: mongo:latest
     ports:
       - "${DB_PORT}:27017"
