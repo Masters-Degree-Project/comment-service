@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   comment-service:
+    container_name: ${SERVICE_ID}
     build: .
     ports:
       - "${SERVICE_PORT:-3000}:${SERVICE_PORT:-3000}"
@@ -17,6 +18,7 @@ services:
       - traefik-network
 
   comment-service-mongodb:
+    container_name: ${SERVICE_ID}-db
     image: mongo:latest
     ports:
       - "${DB_PORT}:27017"
